@@ -11,9 +11,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @Configuration
 public class DataSourceConfig {
 
-    @Bean // terminar de configurar, configuraciones personalizadas
+    @Bean 
     public DataSource dataSource() {
-
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:orcl");
         dataSource.setUsername("EDesalesTareaAgosto8");
