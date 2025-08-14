@@ -83,6 +83,23 @@ public class TareaDAOImplementation implements TareaDAO{
         }
         return result;
     }
+
+    @Override
+    public Result DarTareaXId(int idTarea) {
+        Result result = new Result();
+        try {
+             TypedQuery<Tarea> taQuery = entityManager.createQuery("FROM Tarea WHERE idTarea = :idtarea", Tarea.class);
+             taQuery.setParameter("idtarea", idTarea);
+             Tarea tareaEspecifica = taQuery.getSingleResult();
+             result.object = tareaEspecifica;
+            
+             result.correct = true;
+        } catch (Exception ex) {
+            result.errorMessage = ex.getLocalizedMessage();
+            result.correct = false;
+        }
+        return result;
+    }
     
     
 }

@@ -1,5 +1,6 @@
 package com.digis.EDesalesTareaServidorAgosto11.RestController;
 
+import com.digis.EDesalesTareaServidorAgosto11.DAO.EstadoTareaServiceDAO;
 import com.digis.EDesalesTareaServidorAgosto11.DAO.TareaServiceDAO;
 import com.digis.EDesalesTareaServidorAgosto11.JPA.Result;
 import com.digis.EDesalesTareaServidorAgosto11.JPA.Tarea;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +24,8 @@ public class RestControllerPrincipal {
 
     @Autowired
     TareaServiceDAO tareaServiceDAO;
+    @Autowired
+    EstadoTareaServiceDAO estadoTareaServiceDAO;
 
     @GetMapping
     public ResponseEntity darTareas() {
@@ -38,8 +42,36 @@ public class RestControllerPrincipal {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
         }
     }
+    @GetMapping("/DarTareaXId")
+    public ResponseEntity tareaXId(@RequestParam int idTarea){
+        Result result = new Result();
+        try {
+            result = tareaServiceDAO.DarTareaXId(idTarea);
+            
+            if (result.object == null) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(result);
+        } catch (Exception ex) {
+            result.ex = ex;
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
+        }
+    }
+    @GetMapping("/DarEstadoTarea")
+    public ResponseEntity listadoEstadoTarea(){
+        Result result = new Result();
+        try {
+            result = estadoTareaServiceDAO.DarListadoEstadosTareas();
+            if(result.objects.isEmpty()){
+                return ResponseEntity.noContent().build();
+            }
+             return ResponseEntity.ok(result);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
+        }
+    }
 
-    @PostMapping("/ApregarNuevaTarea")
+    @PostMapping("/AgregarNuevaTarea")
     public ResponseEntity agregarTarea(@RequestBody Tarea tarea) {
         Result result = new Result();
         try {

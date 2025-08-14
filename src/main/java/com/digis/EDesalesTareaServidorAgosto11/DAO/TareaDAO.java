@@ -9,6 +9,7 @@ import com.digis.EDesalesTareaServidorAgosto11.JPA.Tarea;
  */
 public interface TareaDAO {
     Result DarListadoTarea();
+    Result DarTareaXId(int idTarea);
     Result AgregarTarea(Tarea tarea);
     Result EditarTarea(Tarea tarea);
     Result EliminarTarea(Tarea tarea);

@@ -15,17 +15,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.DELETE,"/tarea/BorrarTarea").permitAll()
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                .requestMatchers(HttpMethod.DELETE, "/tarea/BorrarTarea").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/tarea/ActualizarTarea").permitAll()
-                .requestMatchers(HttpMethod.POST,"/tarea/ApregarNuevaTarea").permitAll()
+                .requestMatchers(HttpMethod.POST, "/tarea/AgregarNuevaTarea").permitAll()
+                .requestMatchers(HttpMethod.GET, "/tarea/DarTareaXId").permitAll()
+                .requestMatchers(HttpMethod.GET, "/tarea/DarEstadoTarea").permitAll()
                 .requestMatchers(HttpMethod.GET, "/tarea").permitAll()
                 .anyRequest().authenticated()
-            );
+                );
 
         return http.build();
     }

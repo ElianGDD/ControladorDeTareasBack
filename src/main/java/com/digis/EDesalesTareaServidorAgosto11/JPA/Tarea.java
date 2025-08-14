@@ -23,6 +23,8 @@ public class Tarea {
     private int idTarea;
     @Column(name = "TITULO")
     private String titulo;
+    @Column(name = "DESCRIPCION")
+    private String descripcion;
     @Column (name = "FECHAVENCIMIENTO")
     private Date fechaVencimiento;
     @ManyToOne
@@ -45,6 +47,14 @@ public class Tarea {
         this.titulo = titulo;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public Date getFechaVencimiento() {
         return fechaVencimiento;
     }
@@ -61,5 +71,6 @@ public class Tarea {
         this.EstadoTarea = EstadoTarea;
     }
 
+  
     
 }

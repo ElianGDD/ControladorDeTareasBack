@@ -16,6 +16,9 @@ public class TareaServiceDAO {
     public Result DarListadoTareaService(){
         return tareaDAOImplementation.DarListadoTarea();
     }
+    public Result DarTareaXId(int idTarea){
+        return tareaDAOImplementation.DarTareaXId(idTarea);
+    }
     public Result AgregarTarea(Tarea tarea){
         return tareaDAOImplementation.AgregarTarea(tarea);
     }
